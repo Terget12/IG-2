@@ -21,7 +21,7 @@ except ImportError:
 # ============================================================
 #  কনফিগারেশন (Configuration)
 # ============================================================
-Token = 8907855740:AAG6sN53HdYYps0CD_TJZhcRMJ0k9SJPoKM
+Token = "8907855740:AAG6sN53HdYYps0CD_TJZhcRMJ0k9SJPoKM"
 Admin ID = 6901639746
 # --- Flask Dummy Server for Render ---
 app = Flask(__name__)
