@@ -1,6 +1,7 @@
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 import requests
+from flask import Flask
 import json
 import time
 import threading
@@ -240,7 +241,7 @@ def show_user_countries(chat_id, srv_id, message_id=None):
     for cnt_id, cnt in srv_data.get("countries", {}).items():
         if len(cnt.get("ranges", {})) > 0:
             buttons.append(InlineKeyboardButton(text=f"{get_flag(cnt['name'])} {cnt['name']}", callback_data=f"usr_c|{srv_id}|{cnt_id}"))
-    if buttons: markup.add(*buttons)
+    if buons: markup.add(*buttons)
     markup.add(InlineKeyboardButton("🔙 Back to Services", callback_data="back_to_user_services"))
     text = f"{emo('globe')} <b>SELECT COUNTRY</b> {emo('globe')}\n━━━━━━━━━━━━━━━━━━\n📱 Service: <code>{html.escape(srv_data['name'])}</code>\n\nChoose your country below:"
     safe_send(chat_id, text, markup, message_id)
