@@ -21,9 +21,18 @@ except ImportError:
 # ============================================================
 #  কনফিগারেশন (Configuration)
 # ============================================================
-TOKEN       = "8907855740:AAG6sN53HdYYps0CD_TJZhcRMJ0k9SJPoKM"
-ADMIN_ID    = 6901639746
+Token = 8907855740:AAG6sN53HdYYps0CD_TJZhcRMJ0k9SJPoKM
+Admin ID = 6901639746
+# --- Flask Dummy Server for Render ---
+app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return "Bot is alive!", 200
+
+def run_flask():
+    # Listen on 0.0.0.0 so it's accessible externally by Render
+    app.run(host="0.0.0.0", port=10000)
 # ── 2 Panel Configuration ──
 PANELS = [
     {"url": "http://63.141.255.227", "key": "nxa_27c40799d4f104fd0649d098c843dab44d879bc2"},
@@ -1023,5 +1032,9 @@ def process_broadcast(message, msg_id):
 if __name__ == "__main__":
     bot.remove_webhook()
     time.sleep(1)
-    print("👑 ADVANCED BOT MULTI-PANEL v8.2 — LIVE (Controlled Loop)")
+    print("👑 ADVANCED BOT MULTI-PANEL v8.2 — LIVE (Controlled Loop)"
+# Run Flask in a separate thread so it doesn't block the bot
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
     bot.infinity_polling(timeout=30, long_polling_timeout=15)
